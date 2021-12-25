@@ -1,0 +1,8 @@
+* [Home](/)
+* * [Starting](/?id=installation)
+* * [Credits](/?id=credits)
+* [Docs](/docs)
+* * [Client](/docs/client)
+* * [Pages](/docs/pages)
+* * [Client Config Options](/docs/clientconfigoptions)
+* [Examples](/examples)
