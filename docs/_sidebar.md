@@ -6,3 +6,4 @@
 * * [Pages](/docs/pages)
 * * [Client Config Options](/docs/clientconfigoptions)
 * [Examples](/examples)
+* [Github](https://github.com/turtlepaw/discord.jsh/)
