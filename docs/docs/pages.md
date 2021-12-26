@@ -1,4 +1,7 @@
 ## Pages
+
+Discord.js embed pages with buttons!
+
 ### EXAMPLE
 PARAMETER | TYPE | OPTIONAL | DEFAULT | DESCRIPTION
 ------ | ------ | ------ | ------ | ------

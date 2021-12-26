@@ -1,10 +1,8 @@
 const Discord = require("discord.js");
-const ClientConfigOptions = require("../structures/ConfigManager");
-const ClientOptionsManager = require("../structures/OptionsManager");
 const { MessageButton, MessageActionRow } = Discord;
 const EventEmitter = require('node:events');
 const { REST } = require("@discordjs/rest/dist/lib/REST");
-const { Routes } = require("discord-api-types");
+const { Routes } = require("discord-api-types/v9");
 const klawSync = require('klaw-sync');
 
 module.exports = class Client extends EventEmitter {
@@ -27,6 +25,7 @@ module.exports = class Client extends EventEmitter {
      * @param {ClientOptions} options
      */
     constructor({ token = null, clientID = null, testGuildID = null, config = {} } = {}) {
+        super();
         /**
          * The Discord.js client.
          * @type {Discord.Client}
@@ -37,7 +36,7 @@ module.exports = class Client extends EventEmitter {
          * The config for this bot.
          * @type {Object}
          */
-        this.config = options.config || {
+        this.config = config || {
             logCategory: null,
             color: null
         };
@@ -47,9 +46,9 @@ module.exports = class Client extends EventEmitter {
          * @type {Object}
          */
         this.bot = {
-            token: options.token,
-            clientID: options.clientID,
-            testGuildID: options.testGuildID
+            token: token,
+            clientID: clientID,
+            testGuildID: testGuildID
         }
 
         /**
@@ -68,7 +67,14 @@ module.exports = class Client extends EventEmitter {
             public: new Discord.Collection()
         };
 
-        this.initEvents();
+        setTimeout(() => {
+            this.client.once("ready", () => {
+                console.log(`Client Ready as ${this.client.user.tag}! ${this.client.guilds.cache.size} guilds`)
+            });
+        }, 500)
+        setTimeout(() => {
+            this.initEvents();
+        }, 3000);
 
     }
 
@@ -82,15 +88,26 @@ module.exports = class Client extends EventEmitter {
             else if (i.isMessageComponent()) this.emit(`component`, i);
             else this.emit(`unknown`, i);
         });
+        this.client.on("interactionCreate", i => {
+            if(i.isCommand()){
+                this.commands.public.get(i.commandName)?.execute(i, this.client);
+                this.commands.private.get(i.commandName)?.execute(i, this.client);
+            } else if(i.isContextMenu()){
+                this.contextMenus.public.get(i.commandName)?.execute(i, this.client);
+                this.contextMenus.private.get(i.commandName)?.execute(i, this.client);
+            }
+        })
 
         setTimeout(() => {
             /**
              * @type {Discord.CategoryChannel}
              */
             this.logs = this.client.channels.cache.find(e => e.id == this.bot.logCategory && e.type == "GUILD_CATEGORY");
-            if (!this.logs.children.find(e => e.name == "commands" && e.type == "GUILD_TEXT")) this.logs.createChannel("commands")
-            if (!this.logs.children.find(e => e.name == "errors" && e.type == "GUILD_TEXT")) this.logs.createChannel("errors")
-            if (!this.logs.children.find(e => e.name == "other" && e.type == "GUILD_TEXT")) this.logs.createChannel("other")
+            if(this.logs != null){
+                if (!this.logs.children.find(e => e.name == "commands" && e.type == "GUILD_TEXT")) this.logs.createChannel("commands")
+                if (!this.logs.children.find(e => e.name == "errors" && e.type == "GUILD_TEXT")) this.logs.createChannel("errors")
+                if (!this.logs.children.find(e => e.name == "other" && e.type == "GUILD_TEXT")) this.logs.createChannel("other")
+            }
         }, 3000);
     }
 
@@ -167,7 +184,7 @@ module.exports = class Client extends EventEmitter {
      * @param {Discord.ClientOptions} options 
      * @returns 
      */
-    async create(options) {
+    create(options) {
         this.client = new Discord.Client(options);
         this.client.login(this.bot.token);
 
@@ -188,6 +205,6 @@ module.exports = class Client extends EventEmitter {
         rest.put(Routes.applicationCommands(this.bot.clientID), { body: Commands2 })
             .then(() => console.log('Successfully registered application commands. (Public)'))
             .catch(console.error);
-        return this;
+        return this.client;
     }
 }

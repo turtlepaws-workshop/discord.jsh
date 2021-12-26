@@ -1,4 +1,7 @@
-## Pages
+## Client
+
+A Discord.jsh client.
+
 ### EXAMPLE
 PARAMETER | TYPE | OPTIONAL | DEFAULT | DESCRIPTION
 ------ | ------ | ------ | ------ | ------
