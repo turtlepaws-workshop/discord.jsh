@@ -7,18 +7,18 @@
 # **⚠️ This package is still a Work in Progress (WIP) there may be some bugs! ⚠️**
 
 ## 📖 Docs
-[You can view the docs here](https://jsh.trtle.xyz/)
+[You can view the docs here](https://jsh.trtle.xyz/#/)
 
 ## ⚙️ Examples
-[You can view the examples here](https://github.com/TurtlePaw/discord.jsh/examples)
+[You can view the examples here](https://jsh.trtle.xyz/#/Examples/)
 
 ## 🤝 Contributing
 Contributing is always appreciated! 🤗
 
-You can read the [contributing guide here!](https://github.com/TurtlePaw/discord.jsh/contributing.md)
+You can read the [contributing guide here!](https://re.trtle.xyz/#/)
 
 ## 👀 Issues
-You can report a issue <img src="https://us-east-1.tixte.net/uploads/s.trtle.xyz/github.png" style="width: 15px"> [here](https://github.com/TurtlePaw/discord.jsh/issues) or on our <img src="https://us-east-1.tixte.net/uploads/s.trtle.xyz/Discord-Logo-White.png" style="width: 15px"> [Discord Server](https://jsh.trtle.xyz/support)
+You can report a issue <img src="docs/Assets/github.svg" style="width: 15px"> [here](https://github.com/TurtlePaw/discord.jsh/issues) or on our <img src="docs/Assets/Discord_B.svg" style="width: 15px"> [Discord Server](https://jsh.trtle.xyz/#/support)
 
 *Made with 💖 by [Turtlepaw](https://trtle.xyz/)*<br>
 - <img src="docs/Assets/Discord_B.svg" style="width: 15px"> [Discord](https://discord.com/users/820465204411236362)<br>
