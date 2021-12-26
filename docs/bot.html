@@ -1,0 +1,27 @@
+<div id="text"></div>
+<div id="loader">LOADING</div>
+
+<script>
+    console.log(":D")
+    let m = "ADD"
+    const i = document.getElementById("loader")
+    const timer = setInterval(() => {
+        if(m === "ADD"){
+            i.innerText += "."
+            if(i.innerText.length-7 == 3) m = "REMOVE"
+        } else if(m === "REMOVE"){
+            i.innerText = i.innerText.substring(0, i.innerText.length-1)
+            if(i.innerText.length-7 <= 0) m = "ADD"
+        }
+    }, 1000)
+    function CheckCode() {
+        const code = window.location.href.slice(38, window.location.href.length);
+
+        if (code.length <= 0) return `❌ Invalid invite!`
+
+        return `✅ Bot added successfully!`
+    }
+    m = null
+    i.hidden = true
+    document.getElementById("text").innerText = CheckCode();
+</script>
