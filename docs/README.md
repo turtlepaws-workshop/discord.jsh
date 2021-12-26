@@ -3,7 +3,7 @@
 ## About
 Discord.jsh is a package built to make making a bot easier!
 
-- [Examples](/examples)
+- [Examples](/Examples/)
 - [Starting](#Installation)
 
 ## Installation
