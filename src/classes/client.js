@@ -1,7 +1,7 @@
 const Discord = require("discord.js");
 const { MessageButton, MessageActionRow } = Discord;
 const EventEmitter = require('node:events');
-const { REST } = require("@discordjs/rest/dist/lib/REST");
+const { REST } = require('@discordjs/rest');
 const { Routes } = require("discord-api-types/v9");
 const klawSync = require('klaw-sync');
 
