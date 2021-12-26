@@ -1,1 +1,1 @@
-<meta http-equiv="Refresh" content="0; url='https://discord.com/api/oauth2/authorize?client_id=924358696618840094&permissions=0&redirect_uri=https%3A%2F%2Fjsh.trtle.xyz%2F%23%2Fbot.html&scope=applications.commands%20bot'" />
+<meta http-equiv="Refresh" content="0; url='https://discord.com/api/oauth2/authorize?client_id=924358696618840094&permissions=0&redirect_uri=https%3A%2F%2Fjsh.trtle.xyz%2F%23%2Fbot.html&response_type=code&scope=applications.commands%20bot%20guilds%20identify'" />
