@@ -18,10 +18,10 @@ Contributing is always appreciated! 🤗
 You can read the [contributing guide here!](https://re.trtle.xyz/#/)
 
 ## 👀 Issues
-You can report a issue <img src="docs/Assets/github.svg" style="width: 15px"> [here](https://github.com/TurtlePaw/discord.jsh/issues) or on our <img src="docs/Assets/Discord_B.svg" style="width: 15px"> [Discord Server](https://jsh.trtle.xyz/#/support)
+You can report a issue [here](https://github.com/TurtlePaw/discord.jsh/issues) or on our [Discord Server](https://jsh.trtle.xyz/#/support)
 
 *Made with 💖 by [Turtlepaw](https://trtle.xyz/)*<br>
-- <img src="docs/Assets/Discord_B.svg" style="width: 15px"> [Discord](https://discord.com/users/820465204411236362)<br>
-- <img src="docs/Assets/twitter.svg" style="width: 15px"> [Twitter](https://twitter.com/turtlepaw_sims)
-- <img src="docs/Assets/github.svg" style="width: 15px"> [Github](https://github.com/TurtlePaw/)
-- <img src="docs/Assets/npm.svg" style="width: 15px"> [NPM](https://npmjs.com/~turtlepaw)
+- [Discord](https://discord.com/users/820465204411236362)<br>
+- [Twitter](https://twitter.com/turtlepaw_sims)
+- [Github](https://github.com/TurtlePaw/)
+- [NPM](https://npmjs.com/~turtlepaw)

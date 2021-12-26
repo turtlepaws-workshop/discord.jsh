@@ -1,5 +1,5 @@
 {
-  "name": "discord.jsh",
+  "name": "discordjsh",
   "version": "2.0.0",
   "description": "Just a random simple bot handler that does lots of stuff for you!",
   "main": "src/index.js",
@@ -25,7 +25,7 @@
   "bugs": {
     "url": "https://github.com/TurtlePaw/discord.jsh/issues"
   },
-  "homepage": "https://github.com/TurtlePaw/discord.jsh#readme",
+  "homepage": "https://jsh.trtle.xyz/",
   "dependencies": {
     "@discordjs/builders": "^0.10.0",
     "discord.js": "^13.3.1",
