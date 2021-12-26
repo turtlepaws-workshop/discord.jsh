@@ -14,7 +14,7 @@
     {
         "name": "ClientConfigOptions",
         "description": "Config options for a client.",
-        "url": "https://jsh.trtle.xyz/#/docs/clientconfigoptions",
+        "url": "https://jsh.trtle.xyz/#/docs/ClientConfigOptions",
         "example": "```json\nlogCategory: \"851163590811320343\",\ncolor: \"#7289da\"\n```"
     }
 ]
