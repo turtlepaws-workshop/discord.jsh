@@ -8,3 +8,4 @@
 * [Examples](/Examples/)
 * [Support](/support)
 * [Github](https://github.com/turtlepaw/discord.jsh/)
+* [NPM](https://npm.im/discordjsh)
