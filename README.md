@@ -1,8 +1,8 @@
 <center><img src="./Assets/jsh_banner.svg" style="width: 500px"></center>
 
 # Discord.jsh
-[![npm](https://img.shields.io/npm/v/discord.jsh.svg?maxAge=3600)](https://www.npmjs.com/package/discordjsh)
-[![npm](https://img.shields.io/npm/dt/discord.jsh.svg?maxAge=3600)](https://www.npmjs.com/package/discordjsh)
+[![npm](https://img.shields.io/npm/v/discordjsh.svg?maxAge=3600)](https://www.npmjs.com/package/discordjsh)
+[![npm](https://img.shields.io/npm/dt/discordjsh.svg?maxAge=3600)](https://www.npmjs.com/package/discordjsh)
 
 # **⚠️ This package is still a Work in Progress (WIP) there may be some bugs! ⚠️**
 
