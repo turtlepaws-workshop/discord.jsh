@@ -67,7 +67,7 @@ module.exports = {
     /**
      * Executes the event.
      * @param {Discord.Client} client 
-     * @param {Discord.interaction} message 
+     * @param {Discord.Interaction} i 
      */
 	async execute(i, client) {
         if(!i.isButton()) return
