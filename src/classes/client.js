@@ -241,11 +241,17 @@ module.exports = class Client extends EventEmitter {
         this.client.contextMenus = this.contextMenus
 
         rest.put(Routes.applicationGuildCommands(this.bot.clientID, this.bot.testGuildID), { body: Commands1 })
-            .then(() => console.log('Successfully registered application commands. (Private)'))
+            .then((commands) => {
+                this.client.rawGuildCommands = commands
+                console.log('Successfully registered application commands. (Private)')
+            })
             .catch(console.error);
 
         rest.put(Routes.applicationCommands(this.bot.clientID), { body: Commands2 })
-            .then(() => console.log('Successfully registered application commands. (Public)'))
+            .then((commands) => {
+                this.client.rawCommands = commands
+                console.log('Successfully registered application commands. (Public)')
+            })
             .catch(console.error);
         return this.client;
     }
