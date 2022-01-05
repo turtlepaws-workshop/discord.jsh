@@ -56,3 +56,24 @@ new jsh.contextBuilder()
 .setType("USER")
 .toJSON();
 ```
+
+## Event
+```js
+const Discord = require("discord.js");
+const jsh = require("discordjsh");
+
+module.exports = {
+	name: jsh.Events.interactionCreate,
+    /**
+     * Executes the event.
+     * @param {Discord.Client} client 
+     * @param {Discord.interaction} message 
+     */
+	async execute(i, client) {
+        if(!i.isButton()) return
+        if(i.customId == "hello"){
+            i.reply("Hello!");
+        }
+	},
+};
+```

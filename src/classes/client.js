@@ -67,6 +67,11 @@ module.exports = class Client extends EventEmitter {
             public: new Discord.Collection()
         };
 
+        /**
+         * All the events.
+         */
+        this.events = new Discord.Collection();
+
         setTimeout(() => {
             this.client.once("ready", () => {
                 console.log(`Client Ready as ${this.client.user.tag}! ${this.client.guilds.cache.size} guilds`)
@@ -88,27 +93,59 @@ module.exports = class Client extends EventEmitter {
             else if (i.isMessageComponent()) this.emit(`component`, i);
             else this.emit(`unknown`, i);
         });
+        //Useful shortcuts
         this.client.on("interactionCreate", i => {
-            if(i.isCommand()){
+            if(i.isMessageComponent()){
+                if(i.isButton()){
+                    if(i.customId == "jsh_delete") i.message.delete().catch(( ) => { });
+                } else if(i.isSelectMenu()){
+                    if(i.values.includes("jsh_delete")) i.message.delete().catch(( ) => { });
+                }
+            }
+        })
+        this.client.on("interactionCreate", i => {
+            if (i.isCommand()) {
                 this.commands.public.get(i.commandName)?.execute(i, this.client);
                 this.commands.private.get(i.commandName)?.execute(i, this.client);
-            } else if(i.isContextMenu()){
+            } else if (i.isContextMenu()) {
                 this.contextMenus.public.get(i.commandName)?.execute(i, this.client);
                 this.contextMenus.private.get(i.commandName)?.execute(i, this.client);
             }
-        })
+        });
 
         setTimeout(() => {
             /**
              * @type {Discord.CategoryChannel}
              */
             this.logs = this.client.channels.cache.find(e => e.id == this.bot.logCategory && e.type == "GUILD_CATEGORY");
-            if(this.logs != null){
+            if (this.logs != null) {
                 if (!this.logs.children.find(e => e.name == "commands" && e.type == "GUILD_TEXT")) this.logs.createChannel("commands")
                 if (!this.logs.children.find(e => e.name == "errors" && e.type == "GUILD_TEXT")) this.logs.createChannel("errors")
                 if (!this.logs.children.find(e => e.name == "other" && e.type == "GUILD_TEXT")) this.logs.createChannel("other")
             }
         }, 3000);
+    }
+
+    /**
+     * Sets your events dir used for events. (Also adds client.events)
+     * @param {String} dir 
+     */
+    setEventsDir(dir = "./events") {
+        const events = klawSync(dir, { nodir: true, traverseAll: true, filter: f => f.path.endsWith('.js') })
+
+        for (const file of events) {
+            const event = require(`${file.path}`);
+
+            this.events.set(event.name, event);
+
+            if (event?.once) {
+                client.once(event.name, (...args) => event.execute(...args, this.client));
+            } else {
+                client.on(event.name, (...args) => event.execute(...args, this.client));
+            }
+        }
+
+        return this;
     }
 
     /**
@@ -145,24 +182,24 @@ module.exports = class Client extends EventEmitter {
         return this;
     }
 
-        /**
-     * Sets your commands dir used for creating commands. (Also adds client.commands
-     * @example ```js
-     * const jsh = require("discord.jsh");
-     * 
-     * const Cmd = module.exports = {
-     *      name: "avatar", //Case sensit
-     *      type: "USER",
-     *      //If you use the defualt jsh help command or jsh command getter it will add the usage. TL:DR: You don't need to add `usage`.
-     *      async execute(interaction, client) {
-     *          await interaction.reply(`Test`);
-     *      }
-     * }
-     * 
-     * module.exports.data = new jsh.commandBuilder(Cmd);
-     * ```
-     * @param {String} dir 
-     */
+    /**
+ * Sets your commands dir used for creating commands. (Also adds client.commands
+ * @example ```js
+ * const jsh = require("discord.jsh");
+ * 
+ * const Cmd = module.exports = {
+ *      name: "avatar", //Case sensit
+ *      type: "USER",
+ *      //If you use the defualt jsh help command or jsh command getter it will add the usage. TL:DR: You don't need to add `usage`.
+ *      async execute(interaction, client) {
+ *          await interaction.reply(`Test`);
+ *      }
+ * }
+ * 
+ * module.exports.data = new jsh.commandBuilder(Cmd);
+ * ```
+ * @param {String} dir 
+ */
     setContextDir(dir = "./context_menus") {
         const menus = klawSync(dir, { nodir: true, traverseAll: true, filter: f => f.path.endsWith('.js') })
 
@@ -197,6 +234,10 @@ module.exports = class Client extends EventEmitter {
         this.commands.public.forEach(e => Commands2.push(e.data.toJSON()))
         this.contextMenus.private.forEach(e => Commands1.push(e.data.toJSON()))
         this.contextMenus.public.forEach(e => Commands2.push(e.data.toJSON()))
+        
+        this.client.commands = this.commands;
+        this.client.events = this.events;
+        this.client.contextMenus = this.contextMenus
 
         rest.put(Routes.applicationGuildCommands(this.bot.clientID, this.bot.testGuildID), { body: Commands1 })
             .then(() => console.log('Successfully registered application commands. (Private)'))

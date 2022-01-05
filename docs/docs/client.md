@@ -22,6 +22,15 @@ new jsh.Client({
 .create()
 ```
 ### METHODS
+#### .setEventsDir
+Sets the events directory.
+
+PARAMETER | TYPE | OPTIONAL | DEFAULT | DESCRIPTION
+------ | ------ | ------ | ------ | ------
+dir | String | true | `./events` | The directory where all the event files are.
+```js
+.setEventsDir();
+```
 #### .setCommandsDir
 Sets the commands directory.
 
