@@ -123,6 +123,13 @@ module.exports = class Client extends EventEmitter {
                 if (!this.logs.children.find(e => e.name == "errors" && e.type == "GUILD_TEXT")) this.logs.createChannel("errors")
                 if (!this.logs.children.find(e => e.name == "other" && e.type == "GUILD_TEXT")) this.logs.createChannel("other")
             }
+            for(const event of this.events.values()){
+                if (event?.once) {
+                    this.client.once(event.name, (...args) => event.execute(...args, this.client));
+                } else {
+                    this.client.on(event.name, (...args) => event.execute(...args, this.client));
+                }
+            }
         }, 3000);
     }
 
@@ -137,12 +144,6 @@ module.exports = class Client extends EventEmitter {
             const event = require(`${file.path}`);
 
             this.events.set(event.name, event);
-
-            if (event?.once) {
-                client.once(event.name, (...args) => event.execute(...args, this.client));
-            } else {
-                client.on(event.name, (...args) => event.execute(...args, this.client));
-            }
         }
 
         return this;
