@@ -1,6 +1,6 @@
 {
   "name": "discordjsh",
-  "version": "2.1.2",
+  "version": "2.1.3",
   "description": "Just a random simple bot handler that does lots of stuff for you!",
   "main": "src/index.js",
   "scripts": {
