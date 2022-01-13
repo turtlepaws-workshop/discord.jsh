@@ -174,9 +174,9 @@ module.exports = class Client extends EventEmitter {
             const command = require(`${file.path}`);
 
             if (command?.devOnly == true) {
-                this.commands.private.set(command.name, command);
+                this.commands.private.set(command.name || command.data.toJSON().name, command);
             } else {
-                this.commands.public.set(command.name, command);
+                this.commands.public.set(command.name || command.data.toJSON().name, command);
             };
         }
 
@@ -208,9 +208,9 @@ module.exports = class Client extends EventEmitter {
             const menu = require(`${file.path}`);
 
             if (menu?.devOnly == true) {
-                this.contextMenus.private.set(menu.name, menu);
+                this.contextMenus.private.set(menu?.name || menu.data.toJSON().name, menu);
             } else {
-                this.contextMenus.public.set(menu.name, menu);
+                this.contextMenus.public.set(menu.name || menu.data.toJSON().name, menu);
             };
         }
 
