@@ -122,7 +122,7 @@ module.exports = class Client extends EventEmitter {
                  */
                 const testAutocomplete = module.exports.TestAutocomplete = function (val, compareTo, forceNoChangingStrings=false){
                     if(typeof val != "string") throw new Error(`val must be a string`, Error.Errors.INVALID_ARG);
-                    if(Array.isArray(compareTo)) throw new Error(`compareTo must be a array`, Error.Errors.INVALID_ARG);
+                    if(!Array.isArray(compareTo)) throw new Error(`compareTo must be a array`, Error.Errors.INVALID_ARG);
                     if(compareTo.length <= 0) throw new Error(`compareTo must have at least 1 value`, Error.Errors.INVALID_ARG_LENGTH);
 
                     const Filtered = compareTo.filter(e => e.startsWith(val))
