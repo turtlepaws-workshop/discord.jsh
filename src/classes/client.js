@@ -120,7 +120,7 @@ module.exports = class Client extends EventEmitter {
                  * @param {String[]} compare The valus avalible.
                  * @returns {DiscordAPITypes.APIApplicationCommandOptionChoice[]}
                  */
-                module.exports.TestAutocomplete = function test(val, compareTo, forceNoChangingStrings=false){
+                const testAutocomplete = module.exports.TestAutocomplete = function (val, compareTo, forceNoChangingStrings=false){
                     if(typeof val != "string") throw new Error(`val must be a string`, Error.Errors.INVALID_ARG);
                     if(Array.isArray(compareTo)) throw new Error(`compareTo must be a array`, Error.Errors.INVALID_ARG);
                     if(compareTo.length <= 0) throw new Error(`compareTo must have at least 1 value`, Error.Errors.INVALID_ARG_LENGTH);
@@ -145,8 +145,8 @@ module.exports = class Client extends EventEmitter {
                     return ReturnArray;
                 }
 
-                this.commands.public.get(i.commandName)?.executeAutocomplete(i, this.client, TestAutocomplete);
-                this.commands.private.get(i.commandName)?.executeAutocomplete(i, this.client, TestAutocomplete);
+                this.commands.public.get(i.commandName)?.executeAutocomplete(i, this.client, testAutocomplete);
+                this.commands.private.get(i.commandName)?.executeAutocomplete(i, this.client, testAutocomplete);
             }
         });
 
