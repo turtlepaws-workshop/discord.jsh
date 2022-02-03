@@ -5,7 +5,7 @@ const { REST } = require('@discordjs/rest');
 const { Routes } = require("discord-api-types/v9");
 const klawSync = require('klaw-sync');
 const Error = require("../Error");
-const DiscordAPITypes = require("discord-api-types");
+const DiscordAPITypes = require("discord-api-types/v9");
 const { fixText } = require("../util/util");
 
 module.exports = class Client extends EventEmitter {
