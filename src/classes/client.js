@@ -4,6 +4,9 @@ const EventEmitter = require('node:events');
 const { REST } = require('@discordjs/rest');
 const { Routes } = require("discord-api-types/v9");
 const klawSync = require('klaw-sync');
+const Error = require("../Error");
+const DiscordAPITypes = require("discord-api-types");
+const { fixText } = require("../util/util");
 
 module.exports = class Client extends EventEmitter {
     /**
@@ -110,6 +113,40 @@ module.exports = class Client extends EventEmitter {
             } else if (i.isContextMenu()) {
                 this.contextMenus.public.get(i.commandName)?.execute(i, this.client);
                 this.contextMenus.private.get(i.commandName)?.execute(i, this.client);
+            } else if(i.isAutocomplete()){
+                /**
+                 * Tests a value for autocomplete. (This may not be *exactly* as you expected)
+                 * @param {String} val The selected value that the user picked.
+                 * @param {String[]} compare The valus avalible.
+                 * @returns {DiscordAPITypes.APIApplicationCommandOptionChoice[]}
+                 */
+                module.exports.TestAutocomplete = function test(val, compareTo, forceNoChangingStrings=false){
+                    if(typeof val != "string") throw new Error(`val must be a string`, Error.Errors.INVALID_ARG);
+                    if(Array.isArray(compareTo)) throw new Error(`compareTo must be a array`, Error.Errors.INVALID_ARG);
+                    if(compareTo.length <= 0) throw new Error(`compareTo must have at least 1 value`, Error.Errors.INVALID_ARG_LENGTH);
+
+                    const Filtered = compareTo.filter(e => e.startsWith(val))
+                    /**
+                     * @type {DiscordAPITypes.APIApplicationCommandOptionChoice[]}
+                     */
+                    const ReturnArray = [];
+
+                    for(const item of Filtered){
+                        if(!item?.name && !item?.value) throw new Error(`item.name and item.value are both missing!`, Error.Errors.MISSING_ARGS);
+                        const NameOrValue = item?.name == null ? item.value : item.name;
+                        const ValueOrName = item?.value == null ? item.name : item.value;
+
+                        ReturnArray.push({
+                            name: forceNoChangingStrings ? NameOrValue : fixText(NameOrValue),
+                            value: ValueOrName
+                        });
+                    }
+
+                    return ReturnArray;
+                }
+
+                this.commands.public.get(i.commandName)?.executeAutocomplete(i, this.client, TestAutocomplete);
+                this.commands.private.get(i.commandName)?.executeAutocomplete(i, this.client, TestAutocomplete);
             }
         });
 
