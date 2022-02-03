@@ -138,6 +138,7 @@ module.exports = class Client extends EventEmitter {
                         });
                     }
 
+                    ReturnArray.length = 24
                     return ReturnArray;
                 }
 
