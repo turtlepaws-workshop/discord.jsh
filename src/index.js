@@ -96,3 +96,4 @@ module.exports.Events = {
     "warn": "warn",
     "webhookUpdate": "webhookUpdate",
 }
+module.exports.TestAutocomplete = Client.TestAutocomplete;
