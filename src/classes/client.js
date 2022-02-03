@@ -131,14 +131,10 @@ module.exports = class Client extends EventEmitter {
                      */
                     const ReturnArray = [];
 
-                    for(const item of Filtered){
-                        if(!item?.name && !item?.value) throw new Error(`item.name and item.value are both missing!`, Error.Errors.MISSING_ARGS);
-                        const NameOrValue = item?.name == null ? item.value : item.name;
-                        const ValueOrName = item?.value == null ? item.name : item.value;
-
+                    for(const Name of Filtered){
                         ReturnArray.push({
-                            name: forceNoChangingStrings ? NameOrValue : fixText(NameOrValue),
-                            value: ValueOrName
+                            name: forceNoChangingStrings ? Name : fixText(Name),
+                            value: Name
                         });
                     }
 

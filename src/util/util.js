@@ -1,3 +1,6 @@
+/**
+ * @param {String} text
+ */
 module.exports.fixText = (text) => {
     //Check to make sure everything is right
     if (!text) throw new TypeError("`text` is a required arg and is missing");
@@ -12,6 +15,9 @@ module.exports.fixText = (text) => {
 
     //Merge them and make the first letter upper case
     let returnedText = oldText.toUpperCase() + newText;
+
+    //Remove `_` and `-`
+    returnedText = returnedText.replaceAll(`_`, ` `).replaceAll(`-`, ` `)
 
     //Return the final text
     return `${returnedText}`;
