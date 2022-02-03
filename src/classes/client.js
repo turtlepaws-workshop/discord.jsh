@@ -138,7 +138,8 @@ module.exports = class Client extends EventEmitter {
                         });
                     }
 
-                    ReturnArray.length = 24
+                    if(ReturnArray.length >= 25) ReturnArray.length = 24;
+
                     return ReturnArray;
                 }
 
