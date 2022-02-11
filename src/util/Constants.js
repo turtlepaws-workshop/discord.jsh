@@ -151,3 +151,8 @@ module.exports.Events = {
         "warn": "warn",
         "webhookUpdate": "webhookUpdate",
 }
+
+module.exports.ClientHeaders = {
+    "COMMANDS": `CLIENT_COMMANDS`,
+    "READY": `CLIENT_READY`
+}

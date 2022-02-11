@@ -7,6 +7,7 @@ const klawSync = require('klaw-sync');
 const Error = require("../Error");
 const DiscordAPITypes = require("discord-api-types/v9");
 const { fixText } = require("../util/util");
+const { ClientHeaders } = require("../util/Constants");
 
 module.exports = class Client extends EventEmitter {
     /**
@@ -16,18 +17,35 @@ module.exports = class Client extends EventEmitter {
      */
 
     /**
+    * The function for custom logs.
+    * @typedef {Function} CustomLogExecute
+    * @param {any} logValue
+    * @param {Discord.Client} client
+    * @returns {String}
+    */
+
+    /**
+     * @typedef customLogs
+     * @property {CustomLogExecute} [clientReady=null]
+     * @property {CustomLogExecute} [commandsGlobal=null]
+     * @property {CustomLogExecute} [commandsGuild=null] 
+     */
+
+    /**
      * @typedef ClientOptions
      * @property {String} [token=null]
      * @property {String} [clientID=null]
      * @property {String} [testGuildID=null]
      * @property {ConfigOptions} [config={}]
+     * @property {customLogs} [customLogs={}]
+     * @property {Boolean} [logHeader=true]
      */
 
     /**
      * The client constructor.
      * @param {ClientOptions} options
      */
-    constructor({ token = null, clientID = null, testGuildID = null, config = {} } = {}) {
+    constructor({ token = null, clientID = null, testGuildID = null, config = {}, customLogs = {}, logHeader = true } = {}) {
         super();
         /**
          * The Discord.js client.
@@ -63,6 +81,16 @@ module.exports = class Client extends EventEmitter {
         };
 
         /**
+         * If the logs should have a [HEADER].
+         */
+        this.logHeader = logHeader;
+
+        /**
+         * All the custom logs.
+         */
+        this.customLogs = customLogs;
+
+        /**
          * All the context menus.
          */
         this.contextMenus = {
@@ -77,7 +105,7 @@ module.exports = class Client extends EventEmitter {
 
         setTimeout(() => {
             this.client.once("ready", () => {
-                console.log(`Client Ready as ${this.client.user.tag}! ${this.client.guilds.cache.size} guilds`)
+                customLogs.clientReady != null ? customLogs.clientReady(this.client, this.client) : console.log(this.header(ClientHeaders.READY) + `Client Ready as ${this.client.user.tag}! ${this.client.guilds.cache.size} guilds`)
             });
         }, 500)
         setTimeout(() => {
@@ -253,6 +281,16 @@ module.exports = class Client extends EventEmitter {
     }
 
     /**
+     * Creates a [HEADER].
+     * @private
+     * @param {String} text 
+     * @returns {String}
+     */
+    header(text){
+        return this.logHeader ? (text.toUpperCase() + " ") : ``;
+    }
+
+    /**
      * Creates the client.
      * @param {Discord.ClientOptions} options 
      * @returns 
@@ -278,14 +316,14 @@ module.exports = class Client extends EventEmitter {
         rest.put(Routes.applicationGuildCommands(this.bot.clientID, this.bot.testGuildID), { body: Commands1 })
             .then((commands) => {
                 this.client.rawGuildCommands = commands
-                console.log('Successfully registered application commands. (Private)')
+                this.customLogs.commandsGuild != null ? this.customLogs.commandsGuild(commands, this.client) : console.log(this.header(ClientHeaders.COMMANDS) + 'Successfully registered application commands. (Private)');
             })
             .catch(console.error);
 
         rest.put(Routes.applicationCommands(this.bot.clientID), { body: Commands2 })
             .then((commands) => {
                 this.client.rawCommands = commands
-                console.log('Successfully registered application commands. (Public)')
+                this.customLogs.commandsGlobal != null ? this.customLogs.commandsGlobal(commands, this.client) : console.log(this.header(ClientHeaders.COMMANDS) + 'Successfully registered application commands. (Public)')
             })
             .catch(console.error);
         return this.client;
