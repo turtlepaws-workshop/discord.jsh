@@ -287,7 +287,7 @@ module.exports = class Client extends EventEmitter {
      * @returns {String}
      */
     header(text){
-        return this.logHeader ? (text.toUpperCase() + " ") : ``;
+        return this.logHeader ? (`[${text.toUpperCase()}] `) : ``;
     }
 
     /**
