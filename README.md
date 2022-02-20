@@ -4,13 +4,13 @@
 [![npm](https://img.shields.io/npm/v/discordjsh.svg?maxAge=3600)](https://www.npmjs.com/package/discordjsh)
 [![npm](https://img.shields.io/npm/dt/discordjsh.svg?maxAge=3600)](https://www.npmjs.com/package/discordjsh)
 
-# **⚠️ This package is still a Work in Progress (WIP) there may be some bugs! ⚠️**
+# ~~**⚠️ This package is still a Work in Progress (WIP) there may be some bugs! ⚠️**~~
 
 ## 📖 Docs
-[You can view the docs here](https://jsh.trtle.xyz/#/)
+[You can view the docs here](https://discordjsh.js.org/#/)
 
 ## ⚙️ Examples
-[You can view the examples here](https://jsh.trtle.xyz/#/Examples/)
+[You can view the examples here](https://discordjsh.js.org/#/Examples/)
 
 ## 🤝 Contributing
 Contributing is always appreciated! 🤗

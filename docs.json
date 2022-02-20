@@ -2,19 +2,19 @@
     {
         "name": "Pages",
         "description": "Discord.js embed pages with buttons!",
-        "url": "https://jsh.trtle.xyz/#/docs/pages",
+        "url": "https://discordjsh.js.org/#/docs/pages",
         "example": "```js\nnew jsh.Pages()\n.setInteraction(interaction) //Command interaction or component interaction\n.setPages([\nnew Discord.MessageEmbed()\n.setTitle(\"Page 1\")\n.setColor(\"RANDOM\"),\nnew Discord.MessageEmbed()\n.setTitle(\"Page 2\")\n.setColor(\"RANDOM\")\n]) //Array of Discord MessageEmbeds\n.setEmojis(\"⬅️\", \"➡️\") //Back emoji, foward emoji\n.send() //Replys to the interaction or edits the interaction;\n```"
     },
     {
         "name": "Client",
         "description": "A Discord.jsh client.",
-        "url": "https://jsh.trtle.xyz/#/docs/client",
+        "url": "https://discordjsh.js.org/#/docs/client",
         "example": "```js\nnew jsh.Client({\ntoken: \"NzkyNzE1NDU0MTk2MDg4ODQy.X-hvzA.Ovy4MCQywSkoMRRclStW4xAYK7I\",\ncliendID: \"123456789012345678\",\ntestGuildID: \"876543210987654321\",\nconfig: {\ncolor: \"#7289da\" //Old blurple color\n}\n})\n.create()\n```"
     },
     {
         "name": "ClientConfigOptions",
         "description": "Config options for a client.",
-        "url": "https://jsh.trtle.xyz/#/docs/ClientConfigOptions",
+        "url": "https://discordjsh.js.org/#/docs/ClientConfigOptions",
         "example": "```json\nlogCategory: \"851163590811320343\",\ncolor: \"#7289da\"\n```"
     }
 ]
